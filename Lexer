@@ -37,7 +37,7 @@ public class lexer {
         position++;
       }
     }
-   
+   return tokens;
   }
 
   public static void main(String[] args) {
