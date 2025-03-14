@@ -1,0 +1,37 @@
+# JVM-Lite: A Lightweight Java Interpreter for IoT and Embedded Systems  
+
+JVM-Lite is a modern, lightweight Java interpreter designed for **IoT/embedded systems** and **browser execution**. It focuses on solving real-world problems like **real-time constraints**, **low-latency garbage collection**, and **cross-platform compatibility**.
+
+---
+
+### **Why JVM-Lite?**  
+Traditional JVMs (like HotSpot or GraalVM) are heavy and lack support for modern use cases like IoT devices or browser-based execution. JVM-Lite bridges this gap with:  
+- **Real-Time Garbage Collection**: Optimized for low-latency environments.  
+- **Time-Travel Debugging**: Step backward through execution to debug complex issues.  
+- **WebAssembly Support**: Compile Java code to WebAssembly for browser execution.  
+
+This project is ideal for developers working on **edge computing**, **robotics**, or **browser-based Java applications**.
+
+---
+
+### **Key Features**  
+- **Lightweight Design**: Minimal memory footprint for embedded systems.  
+- **Real-Time GC**: Designed for predictable performance in latency-sensitive environments.  
+- **Debugging Tools**: Time-travel debugging for reproducible issue resolution.  
+- **Wasm Integration**: Run Java code in browsers without plugins.  
+
+---
+
+### **Getting Started**  
+
+#### **Prerequisites**  
+- Java 17+  
+- Maven/Gradle for building the project  
+- [TeaVM](https://teavm.org/) for WebAssembly compilation  
+
+#### **Installation**  
+Clone the repository and set up the project:  
+```bash
+git clone https://github.com/gaanesh434/jvm-lite.git
+cd jvm-lite
+mvn clean install
