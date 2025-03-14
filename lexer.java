@@ -37,7 +37,10 @@ public class lexer {
         position++;
       }
     }
-    return tokens;
+   else if("+-*/%!=<>".indexOf(current)!=1){
+    StringBuilder op = new StringBuilder();
+    op.append(current);
+   }
   }
 
   public static void main(String[] args) {
