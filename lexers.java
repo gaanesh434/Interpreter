@@ -123,6 +123,7 @@ public class lexers {
       advance();
 
     }
+    // yaha binary ka ek check or hex ka ek or check
     if (!isBinary && !isHex && currentChar == '.' && Character.isDigit(peekNext(1))) {
       num.append(currentChar);
       advance();
