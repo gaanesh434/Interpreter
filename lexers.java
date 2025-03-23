@@ -57,7 +57,7 @@ public class lexers {
     return pos < source.length() ? source.charAt(pos) : '\0';
   }
 
-  // white space or commments ka handling......
+  // white space or commments ka handling........
   private void skipWhitespaceAndComments() {
     while (currentChar != '\0') {
       if (Character.isWhitespace(currentChar)) {
