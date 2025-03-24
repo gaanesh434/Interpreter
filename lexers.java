@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class lexers {
+public class Lexers {
   private final String source;
   private int position = 0;
   private char currentChar;
@@ -17,11 +17,11 @@ public class lexers {
       "interface", "long", "native", "new", "package", "private",
       "protected", "public", "return", "short", "static", "strictfp",
       "super", "switch", "synchronized", "this", "throw", "throws",
-      "transient", "try", "void", "volatile", "while",
+      "transient", "try", "void", "volatile", "while", "String",
       "module", "open", "requires", "exports", "opens", "uses", "provides",
       "var", "record", "yield", "sealed", "permits", "non-sealed"));
 
-  public lexers(String source) {
+  public Lexers(String source) {
     this.source = preprocessUnicodeEscapes(source);
     this.currentChar = this.source.isEmpty() ? '\0' : this.source.charAt(position);
   }
@@ -88,8 +88,8 @@ public class lexers {
 
   private String readIdentifier() {
     StringBuilder id = new StringBuilder();
-    while (Character.isUnicodeIdentifierPart(currentChar) ||
-        (id.length() == 0 && Character.isUnicodeIdentifierStart(currentChar))) {
+    while (currentChar != '\0' && (Character.isUnicodeIdentifierPart(currentChar) ||
+        (id.length() == 0 && Character.isUnicodeIdentifierStart(currentChar)))) {
       id.append(currentChar);
       advance();
     }
@@ -174,66 +174,65 @@ public class lexers {
     currentChar = source.isEmpty() ? '\0' : source.charAt(position);
 
     while (currentChar != '\0') {
-      skipWhitespaceAndComments();
+      if (Character.isWhitespace(currentChar)) {
+        skipWhitespaceAndComments();
+        continue;
+      }
 
-      if (Character.isUnicodeIdentifierStart(currentChar)) {
+      if (currentChar == '/') {
+        if (peekNext(1) == '/') {
+          skipWhitespaceAndComments();
+          continue;
+        } else if (peekNext(1) == '*') {
+          skipWhitespaceAndComments();
+          continue;
+        }
+      }
+
+      if (Character.isUnicodeIdentifierStart(currentChar) || currentChar == '_') {
         String identifier = readIdentifier();
         tokens.add(KEYWORDS.contains(identifier) ? "KEYWORD:" + identifier : "IDENTIFIER:" + identifier);
       } else if (Character.isDigit(currentChar)) {
         tokens.add("NUMBER:" + readNumber());
       } else if (currentChar == '"' || currentChar == '\'') {
         tokens.add("STRING:" + readString());
+      } else if (currentChar == '=' && peekNext(1) == '=') {
+        advance();
+        advance();
+        tokens.add("OPERATOR:==");
+      } else if (currentChar == '!' && peekNext(1) == '=') {
+        advance();
+        advance();
+        tokens.add("OPERATOR:!=");
+      } else if (currentChar == '>' && peekNext(1) == '=') {
+        advance();
+        advance();
+        tokens.add("OPERATOR:>=");
+      } else if (currentChar == '<' && peekNext(1) == '=') {
+        advance();
+        advance();
+        tokens.add("OPERATOR:<=");
+      } else if (currentChar == '&' && peekNext(1) == '&') {
+        advance();
+        advance();
+        tokens.add("OPERATOR:&&");
+      } else if (currentChar == '|' && peekNext(1) == '|') {
+        advance();
+        advance();
+        tokens.add("OPERATOR:||");
+      } else if (currentChar == '+' || currentChar == '-' || currentChar == '*' ||
+          currentChar == '/' || currentChar == '%' || currentChar == '=' ||
+          currentChar == ';') {
+        tokens.add("OPERATOR:" + currentChar);
+        advance();
+      } else if (currentChar == '(' || currentChar == ')' || currentChar == '{' ||
+          currentChar == '}') {
+        tokens.add("SYMBOL:" + currentChar);
+        advance();
+      } else if (currentChar == '\0') {
+        break;
       } else {
-
-        char next = peekNext(1);
-        if (currentChar == '=' && next == '=') {
-          advance();
-          advance();
-          tokens.add("OPERATOR:==");
-        } else if (currentChar == '!' && next == '=') {
-          advance();
-          advance();
-          tokens.add("OPERATOR:!=");
-        } else if (currentChar == '>' && next == '=') {
-          advance();
-          advance();
-          tokens.add("OPERATOR:>=");
-        } else if (currentChar == '<' && next == '=') {
-          advance();
-          advance();
-          tokens.add("OPERATOR:<=");
-        } else if (currentChar == '&' && next == '&') {
-          advance();
-          advance();
-          tokens.add("OPERATOR:&&");
-        } else if (currentChar == '|' && next == '|') {
-          advance();
-          advance();
-          tokens.add("OPERATOR:||");
-        } else if (currentChar == '+') {
-          advance();
-          tokens.add("OPERATOR:+");
-        } else if (currentChar == '-') {
-          advance();
-          tokens.add("OPERATOR:-");
-        } else if (currentChar == '*') {
-          advance();
-          tokens.add("OPERATOR:*");
-        } else if (currentChar == '/') {
-          advance();
-          tokens.add("OPERATOR:/");
-        } else if (currentChar == '%') {
-          advance();
-          tokens.add("OPERATOR:%");
-        } else if (currentChar == '(') {
-          advance();
-          tokens.add("SYMBOL:(");
-        } else if (currentChar == ')') {
-          advance();
-          tokens.add("SYMBOL:)");
-        } else {
-          throw new RuntimeException("Unexpected character: '" + currentChar + "' at position " + position);
-        }
+        throw new RuntimeException("Unexpected character: '" + currentChar + "' at position " + position);
       }
     }
     return tokens;
@@ -241,7 +240,7 @@ public class lexers {
 
   // iska main method.....
   public static void main(String[] args) {
-    lexers lexer = new lexers("int x = 0b1010 + 0x1AF; String msg = \"Hello\\nWorld\";");
+    Lexers lexer = new Lexers("int x = 0b1010 + 0x1AF; String msg = \"Hello\\nWorld\";");
     System.out.println(lexer.tokenize());
   }
 }
