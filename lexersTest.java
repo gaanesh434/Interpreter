@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test; // Import the Test annotation
-import static org.junit.jupiter.api.Assertions.assertEquals; // Static import for assertEquals
-import static org.junit.jupiter.api.Assertions.assertThrows; // Static import for assertThrows
+import static org.junit.jupiter.api.Assertions.assertEquals; 
+import static org.junit.jupiter.api.Assertions.assertThrows; 
 
 import java.util.Arrays;
 import java.util.List;
