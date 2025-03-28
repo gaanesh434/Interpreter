@@ -116,7 +116,7 @@ public class Lexers {
         advance();
       }
     }
-    // yaha pe binary ka handling.............
+    // yaha pe binary ka handling..............
     while (currentChar != '\0') {
       if (currentChar == '_') {
         advance();
