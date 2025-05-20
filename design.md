@@ -75,14 +75,3 @@ An interpreter for Java tailored to embedded systems and browser execution, with
 - **GC Pause Measurement:** Run on Raspberry Pi, log pause times
 - **Wasm Speed:** Compare matrix multiplication in browser (vs. JS)
 
----
-
-## Resume Bullets
-- Built a Java interpreter with real-time GC (0.5ms pauses) and Wasm compilation for browser execution.
-- Debugged race conditions in IoT code via time-travel debugging.
-
----
-
-## Interview Defense
-- HotSpot's GC can't meet IoT deadlines—my interpreter guarantees sub-millisecond pauses.
-- Java in browsers via Wasm opens new use cases for edge computing. 
