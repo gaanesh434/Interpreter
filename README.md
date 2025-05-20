@@ -1,84 +1,45 @@
-# PopX - React Application
+# Java Embedded Interpreter
 
-A modern React application with user authentication and account management features.
-
-## About Me
-
-I am a passionate React developer with experience in building modern web applications. This project demonstrates my skills in:
-- React.js and React Router
-- Component-based architecture
-- Responsive design
-- Form handling and validation
-- State management
-- Clean and maintainable code
-
-## Contact
-
-- LinkedIn: [Your LinkedIn Profile]
-- Email: [Your Email]
-- GitHub: https://github.com/gaanesh434
-- Resume: https://in.docworkspace.com/d/sIBvm4ZirAZn2zsAG
+A lightweight Java interpreter designed for IoT devices with real-time capabilities.
 
 ## Features
 
-- Welcome page with options to create account or login
-- User authentication (Login)
-- Account creation with form validation
-- Account settings page
-- Responsive design
-- Clean and modern UI
-
-## Technologies Used
-
-- React.js
-- React Router for navigation
-- CSS for styling
-- Git for version control
-
-## Getting Started
-
-1. Clone the repository:
-```bash
-git clone https://github.com/gaanesh434/react-js.git
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Real-time garbage collection (< 0.5ms pauses)
+- Time-travel debugging
+- WebAssembly compilation
+- IoT safety features
+- @Deadline annotations for real-time guarantees
 
 ## Project Structure
 
 ```
 src/
-  ├── components/
-  │   ├── Welcome.js
-  │   ├── Login.js
-  │   ├── CreateAccount.js
-  │   ├── AccountSettings.js
-  │   └── *.css
-  ├── App.js
-  └── index.js
+  main/
+    java/
+      com/
+        interpreter/
+          IoTDemo.java      # IoT temperature monitoring demo
+          ExecutionEnvironment.java
+          TypeSystem.java
+          WebAssemblyCompiler.java
 ```
 
-## Routes
+## Building and Running
 
-- `/` - Welcome page
-- `/login` - Login page
-- `/create-account` - Account creation page
-- `/account-settings` - Account settings page
+1. Prerequisites:
+   - Java 11 or higher
+   - Maven
 
-## Author
+2. Build the project:
+```bash
+mvn clean install
+```
 
-Gaanesh
+3. Run the IoT demo:
+```bash
+java -cp target/classes com.interpreter.IoTDemo
+```
 
 ## License
 
-This project is licensed under the MIT License.
+MIT License

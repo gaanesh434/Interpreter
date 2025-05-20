@@ -21,3 +21,34 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Compiled class files
+*.class
+
+# Build directories
+target/
+build/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Logs
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# OS specific
+Thumbs.db
