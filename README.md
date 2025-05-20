@@ -1,6 +1,10 @@
 # Java Embedded Interpreter
 
-A lightweight Java interpreter designed for IoT devices with real-time capabilities.
+A real-time Java interpreter for IoT devices with:
+- Real-time GC (pauses < 0.5ms)
+- @Deadline annotations for timing guarantees
+- Time-travel debugging
+- WebAssembly compilation
 
 ## Features
 
